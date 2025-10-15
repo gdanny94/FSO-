@@ -15,13 +15,25 @@ const App = () => {
   const [selected, setSelected] = useState(0);
   const spin = () => {
     const findIndex = Math.floor(Math.random() * anecdotes.length);
-    setSelected(findIndex)
+    setSelected(findIndex);
+  };
+
+  const initialVote = new Array(anecdotes.length).fill(0);
+  const [votes, setVotes] = useState(initialVote);
+
+  const handleVotes = () => {
+    const newVotes = [...votes];
+    console.log(newVotes)
+    newVotes[selected] += 1;
+    setVotes(newVotes);
   };
 
   return (
     <div>
       {anecdotes[selected]}
       <br />
+      <p>Has {votes[selected]} votes</p>
+      <button onClick={handleVotes}>vote</button>
       <button onClick={spin}>next anecdote</button>
     </div>
   );
